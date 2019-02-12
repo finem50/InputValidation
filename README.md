@@ -9,21 +9,15 @@ Request and accept the numerator and denominator of a proper fraction (that mean
 Request and accept a valid 4.0 GPA value (so this must a floating point number in the range 0.0-4.0 with no more than 3 digits after the decimal point). You will just print the value with a label in the case of a valid value.
 
 The next two use the following table:
-Integer
-Color
-2
-Blue
-3
-Crimson
-7
- 
-Gold
- 
-12
-Lime
-20
- 
-Tan
+Integer	Color
+2	Blue
+3	Crimson
+7	Gold
+12	Lime
+20	Tan
+
  Based on the table, request and accept an integer and print the corresponding color name. Anything other than an integer from the integer column is invalid.
+
 Based on the table, request and accept a color name and print the corresponding integer. Anything other than a color name from the table is invalid.
+
 Request and accept a string of up to 32 characters. It may contain whitespace. It must not contain more than 32 characters. For valid strings, output the length of the string followed by the string itself.
