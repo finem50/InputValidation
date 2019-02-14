@@ -3,12 +3,23 @@
 
 using namespace std;
 
+/*TODO:
+-Input validation for num and denom
+	Endless loop if a char is entered
+-Ratio calculation needs to be decimal to 0.0
+-Not a fan of how colorName -> colorNum
+	Avoid switch case based on first letter. Input could be
+	a different color that's not registered but has the same
+	first letter as one that is registered.
+-Finish program
+**/
+
 int main(){
 
 	char choice[3] = {'y'};
 	char colorName[10] = {};
 	char strBuffer[32] = {};
-	int num, denom, color, length;
+	int num, denom, colorNum, length;
 	double ratio;
 	float gpa;
 
@@ -53,10 +64,10 @@ int main(){
 		20 == Tan
 		**/
 		cout << "\nEnter color number: ";
-		cin >> color;
+		cin >> colorNum;
 		cout << "\nName: ";
 
-		switch(color){
+		switch(colorNum){
 
 			case 2:
 				cout << "Blue" << endl;
