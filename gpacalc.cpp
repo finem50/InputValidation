@@ -1,50 +1,56 @@
 #include <iostream>
 #include <locale>
+#include <string>
+
+
 
 using namespace std;
 
-/*TODO:
--Input validation for num and denom
-	Endless loop if a char is entered
--Ratio calculation needs to be decimal to 0.0
--Not a fan of how colorName -> colorNum
-	Avoid switch case based on first letter. Input could be
-	a different color that's not registered but has the same
-	first letter as one that is registered.
--Finish program
-**/
 
 int main(){
 
 	char choice[3] = {'y'};
-	char colorName[10] = {};
-	char strBuffer[32] = {};
-	int num, denom, colorNum, length;
+	string colorName = "";
+	char strBuffer[128] = {};
+	char strEntry[32] = {};
+	int num, denom, colorNum, length, i, strCount = 0;
 	double ratio;
 	float gpa;
 
-	cout << "Welcome to the input validator!\n" << endl;
+	cout << "\nWelcome to the input validator!\n" << endl;
 
 	//Repeat loop until user terminates
 	while(choice[0] == 'y'){
 
 		cout << "Enter numerator: ";
-		cin >> num;
-		cout << "\nEnter denominator: ";
-		cin >> denom;
-		//Ratio should be determined by numerator / denominator
-		//If numerator > denominator then the input is invalid
-		if (num < denom){
+		if(!(cin >> num)){
 
-			ratio = num / denom;
-			cout << "Ratio: " << ratio << endl;
-		}else{
-
-			ratio = 0;
+			cin.clear();
+			cin.ignore(1000, '\n');
 			cout << "Invalid input." << endl;
 		}
 
-		cout << "\n\nEnter GPA: ";
+		cout << "Enter denominator: ";
+		if(!(cin >> denom)){
+
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid input." << endl;
+		}
+
+			//Ratio should be determined by numerator / denominator
+			//If numerator > denominator then the input is invalid
+			if(num < denom){
+
+				ratio = num / (double)denom;
+				cout << "Ratio: " << ratio << endl;
+			}else{
+
+				ratio = 0;
+				cout << "Invalid input." << endl;
+			}
+
+		cout << "\nEnter GPA: ";
 		cin >> gpa;
 		//GPA input that is greater than 4.0 is invalid
 		if(gpa > 4.0){
@@ -53,7 +59,7 @@ int main(){
 			cout << "Invalid input." << endl;
 		}else{
 
-			cout << gpa;
+			cout << "GPA: " << gpa << endl;
 		}
 
 		/* Different colors will correspond with different numbers, as follows:
@@ -65,7 +71,7 @@ int main(){
 		**/
 		cout << "\nEnter color number: ";
 		cin >> colorNum;
-		cout << "\nName: ";
+		cout << "Name: ";
 
 		switch(colorNum){
 
@@ -94,46 +100,57 @@ int main(){
 				break;
 		}
 
-		cout << "\n\nEnter color name: ";
+		cout << "\nEnter color name: ";
 		cin >> colorName;
-		colorName[0] = tolower(colorName[0]);
 		cout << "Color: ";
+ 		/*
+		Nested if/else to match input with color number. It's not ideal but
+		it works.
+ 		**/
+		if(colorName == "Blue" || colorName == "blue"){
 
-		/*Because each color option begins with a unique letter,
-		we can use a switch case off of the char in colorName[0]
-		**/
-		switch(colorName[0]){
+			cout << "2" << endl;
+			colorName = "";
+		}else if(colorName == "Crimson" || colorName == "crimson"){
 
-			case 'b':
-				cout << "2" << endl;
-				break;
+			cout << "3" << endl;
+			colorName = "";
+		}else if(colorName == "Gold" || colorName == "gold"){
 
-			case 'c':
-				cout << "3" << endl;
-				break;
+			cout << "7" << endl;
+			colorName = "";
+		}else if(colorName == "Lime" || colorName =="lime"){
 
-			case 'g':
-				cout << "7" << endl;
-				break;
+			cout << "12" << endl;
+			colorName = "";
+		}else if(colorName == "Tan" || colorName == "tan"){
 
-			case 'l':
-				cout << "12" << endl;
-				break;
+			cout << "20" << endl;
+			colorName = "";
+		}else{
 
-			case 't':
-				cout << "20" << endl;
-				break;
-
-			default:
-				cout << "Invalid input." << endl;
-				break;
+			cout << "Invalid input." << endl;
+			colorName = "";
 		}
 
-		cout << "\n\nEnter string: ";
-		cout << "\nLength: ";
-		cout << "\nData: ";
+		cout << "\nEnter string: ";
+		cin >> strEntry;
+		strncpy(strEntry, strBuffer, sizeof(strEntry));
 
-		cout << "\nMore data to enter? (y/n)";
+		for(i = 0; i < sizeof(strEntry); i++){
+
+			strCount += 1;
+		}
+		cout << "Length: " << strCount << endl;
+		cout << "Data: ";
+		for(i = 0; i < sizeof(strEntry); i++){
+
+			cout << strEntry[i];
+		}
+
+
+		cout << "\n\nMore data to enter? (y/n): ";
+		cin >> choice;
 
 	}
 
