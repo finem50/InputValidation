@@ -8,14 +8,14 @@ using namespace std;
 string numConvert(int a);
 int nameConvert(string s);
 double ratioCalc(int x, int y);
+void flush();
 
 int main(){
 
 	char choice[3] = {'y'};
 	string colorName = "";
-	char strBuffer[128] = {};
-	char strEntry[32] = {};
-	int num, denom, numIn, colorNum, i, strCount = 0;
+	char strBuffer[32];
+	int num = 0, denom = 0, numIn, colorNum, i, strCount = 0;
 	double ratio;
 	float gpa;
 
@@ -27,16 +27,14 @@ int main(){
 		cout << "Enter numerator: ";
 		if(!(cin >> num)){
 
-			cin.clear();
-			cin.ignore(1000, '\n');
+			flush();
 			cout << "Invalid input" << endl;
 		}
 
 		cout << "Enter denominator: ";
 		if(!(cin >> denom)){
 
-			cin.clear();
-			cin.ignore(1000, '\n');
+			flush();
 		}
 
 		//Calculate ratio between num / denom
@@ -55,8 +53,7 @@ int main(){
 		//Check for valid input type
 		if(!(cin >> gpa)){
 
-			cin.clear();
-			cin.ignore(1000, '\n');
+			flush();
 			cout << "Invalid input" << endl;
 		}
 
@@ -76,8 +73,7 @@ int main(){
 		//Check for valid input type
 		if(!(cin >> numIn)){
 
-			cin.clear();
-			cin.ignore(1000, '\n');
+			flush();
 
 		}
 		//Convert from color number -> name
@@ -93,8 +89,7 @@ int main(){
 		//Check for valid input type
 		if(!(cin >> colorName)){
 
-			cin.clear();
-			cin.ignore(1000, '\n');
+			flush();
 		}
 		//Convert from color name -> number
 		colorNum = nameConvert(colorName);
@@ -109,22 +104,17 @@ int main(){
 
 		//must use getline to accomodate potential space character
 		cout << "\nEnter string: ";
-		cin >> strEntry;
-		strncpy(strEntry, strBuffer, sizeof(strEntry));
+		flush();
+		cin.getline(strBuffer, 33);
+		cout << "Length: " << (sizeof(strBuffer) / sizeof(*strBuffer)) << endl;
+		cout << "Data: " << ' ' << strBuffer << endl << endl;
 
-		for(i = 0; i < sizeof(strEntry); i++){
 
-			strCount += 1;
-		}
-		cout << "Length: " << strCount << endl;
-		cout << "Data: ";
-		for(i = 0; i < sizeof(strEntry); i++){
-
-			cout << strEntry[i];
-		}
-
+		flush();
 		//Prompt user for additional loop
-		cout << "\n\nMore data to enter? (y/n): ";
+		//For some reason, user must press enter once more after the final
+		//string input line.
+		cout << "More data to enter? (y/n): ";
 		cin >> choice;
 	}
 
@@ -226,4 +216,11 @@ double ratioCalc(int x, int y){
 	}
 
 	return ratio_c;
+}
+
+//Function to flush out the cin buffer
+void flush(){
+
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
