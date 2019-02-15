@@ -29,7 +29,7 @@ int main(){
 
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input." << endl;
+			cout << "Invalid input" << endl;
 		}
 
 		cout << "Enter denominator: ";
@@ -43,11 +43,12 @@ int main(){
 		ratio = ratioCalc(num, denom);
 		if(ratio == -1){
 
-			cout << "Invalid input." << endl;
+			cout << "Invalid input" << endl;
 		}else{
 
 			cout << "Ratio: " << ratio << endl;
 		}
+
 
 		//GPA will be float value restricted to three decimal places (x.xxx)
 		cout << "\nEnter GPA: ";
@@ -56,14 +57,14 @@ int main(){
 
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid input." << endl;
+			cout << "Invalid input" << endl;
 		}
 
 		//GPA input that is greater than 4.0 is invalid
 		if(gpa > 4.0){
 
 			gpa = 0;
-			cout << "Invalid input." << endl;
+			cout << "Invalid input" << endl;
 		}else{
 
 			gpa = roundf(gpa * 1000) / 1000;
@@ -81,7 +82,11 @@ int main(){
 		}
 		//Convert from color number -> name
 		colorName = numConvert(numIn);
-		cout << "Name: " << colorName << endl;
+		if (colorName == "Invalid input"){
+			cout << colorName << endl << endl;
+		}else{
+			cout << "Name: " << colorName << endl << endl;;
+		}
 
 
 		cout << "Enter color name: ";
@@ -95,13 +100,14 @@ int main(){
 		colorNum = nameConvert(colorName);
 		if(colorNum == -1){
 
-			cout << "Invalid input." << endl;
+			cout << "Invalid input" << endl;
 		}else{
 
 			cout << "Color: " << colorNum << endl;
 		}
 
 
+		//must use getline to accomodate potential space character
 		cout << "\nEnter string: ";
 		cin >> strEntry;
 		strncpy(strEntry, strBuffer, sizeof(strEntry));
@@ -160,7 +166,7 @@ string numConvert(int a){
 			break;
 
 		default:
-			cout << "Invalid input." << endl;;
+			color = "Invalid input";
 			break;
 	}
 
