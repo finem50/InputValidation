@@ -1,6 +1,7 @@
 #include <iostream>
 #include <locale>
 #include <string>
+#include <math.h>
 
 using namespace std;
 
@@ -65,6 +66,7 @@ int main(){
 			cout << "Invalid input." << endl;
 		}else{
 
+			gpa = roundf(gpa * 1000) / 1000;
 			cout << "GPA: " << gpa << endl;
 		}
 
