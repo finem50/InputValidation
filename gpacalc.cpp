@@ -37,6 +37,7 @@ int main(){
 			flush();
 		}
 
+		flush();
 		//Calculate ratio between num / denom
 		ratio = ratioCalc(num, denom);
 		if(ratio == -1){
@@ -118,6 +119,8 @@ int main(){
 		cin >> choice;
 	}
 
+	cout << "\nGoodbye" << endl;
+	
 	return 0;
 }
 
@@ -222,5 +225,5 @@ double ratioCalc(int x, int y){
 void flush(){
 
 	cin.clear();
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.ignore(1000, '\n');
 }
