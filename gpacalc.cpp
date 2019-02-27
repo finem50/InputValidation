@@ -1,3 +1,7 @@
+/*
+Copyright 2019, Max Fine, All rights reserved
+*/
+
 #include <iostream>
 #include <locale>
 #include <string>
