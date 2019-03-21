@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
 Written by: Max Fine
 Resubmission: 3/22/2019
