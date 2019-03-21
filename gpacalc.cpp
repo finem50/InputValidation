@@ -1,3 +1,12 @@
+/**
+Written by: Max Fine
+Resubmission: 3/22/2019
+
+Validate input that is entered by a user for several functions,
+and make sure that the input pertains to the prompt/function
+as well as validating proper input.
+**/
+
 #include <iostream>
 #include <locale>
 #include <string>
@@ -5,16 +14,21 @@
 
 using namespace std;
 
+//Convert number to color name
 string numConvert(int a);
+//Convert color name to number
 int nameConvert(string s);
+//Calculate the decimal value of a numberator over denominator
 double ratioCalc(int x, int y);
+//Erase contents
 void flush();
 
 int main(){
 
 	char choice[3] = {'y'};
 	string colorName = "";
-	char strBuffer[32];
+	//char strBuffer[32];
+	string strBuffer = "";
 	int num = 0, denom = 0, numIn, colorNum, i, strCount = 0;
 	double ratio;
 	float gpa;
@@ -35,19 +49,21 @@ int main(){
 		if(!(cin >> denom)){
 
 			flush();
-		}
-
-		flush();
-		//Calculate ratio between num / denom
-		ratio = ratioCalc(num, denom);
-		if(ratio == -1){
-
 			cout << "Invalid input" << endl;
-		}else{
-
-			cout << "Ratio: " << ratio << endl;
 		}
 
+		//Validate that num and denom are valid
+		if(num && denom){
+			//Calculate ratio between num / denom
+			ratio = ratioCalc(num, denom);
+			if(ratio == -1){
+
+				cout << "Invalid input" << endl;
+			}else{
+
+				cout << "Ratio: " << ratio << endl;
+			}
+		}
 
 		//GPA will be float value restricted to three decimal places (x.xxx)
 		cout << "\nEnter GPA: ";
@@ -56,17 +72,18 @@ int main(){
 
 			flush();
 			cout << "Invalid input" << endl;
-		}
-
-		//GPA input that is greater than 4.0 is invalid
-		if(gpa > 4.0){
-
-			gpa = 0;
-			cout << "Invalid input" << endl;
 		}else{
 
-			gpa = roundf(gpa * 1000) / 1000;
-			cout << "GPA: " << gpa << endl;
+			//GPA input that is greater than 4.0 is invalid
+			if(gpa > 4.0 || gpa < 0){
+
+				gpa = 0;
+				cout << "Invalid input" << endl;
+			}else{
+
+				gpa = roundf(gpa * 1000) / 1000;
+				cout << "GPA: " << gpa << endl;
+			}
 		}
 
 
@@ -105,13 +122,18 @@ int main(){
 
 		//must use getline to accomodate potential space character
 		cout << "\nEnter string: ";
+		//Clear input buffer
 		flush();
-		cin.getline(strBuffer, 33);
-		cout << "Length: " << (sizeof(strBuffer) / sizeof(*strBuffer)) << endl;
-		cout << "Data: " << ' ' << strBuffer << endl << endl;
+		getline(cin, strBuffer);
+		if(strBuffer.size() > 32){
 
+			cout << "Invalid input" << endl << endl;
+		}else{
 
-		flush();
+			cout << "Length: " << strBuffer.size() << endl;
+			cout << "Data: " << strBuffer << endl << endl;
+		}
+
 		//Prompt user for additional loop
 		//For some reason, user must press enter once more after the final
 		//string input line.
@@ -120,7 +142,7 @@ int main(){
 	}
 
 	cout << "\nGoodbye" << endl;
-	
+
 	return 0;
 }
 
@@ -209,11 +231,9 @@ double ratioCalc(int x, int y){
 
 	int num_c = x, denom_c = y;
 	double ratio_c;
+	ratio_c = num_c / (double)denom_c;
 
-	if(num_c < denom_c){
-
-		ratio_c = num_c / (double)denom_c;
-	}else{
+	if(ratio_c <= -1 || ratio_c >= 1){
 
 		ratio_c = -1;
 	}
